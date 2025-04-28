@@ -9,7 +9,7 @@ Pan Eu Jin 23052342
 import numpy as np
 import matplotlib.pyplot as mpl
 
-#Bisection method for f(x)=e^x - 2 in interval [-2,0]
+#Bisection method for f(x)=e^x - 2 in interval [0,1]
 def f(x):
     return np.exp(x)-2          #Change with Q
 def calc_err(a,b):
