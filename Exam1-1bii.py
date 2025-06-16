@@ -1,0 +1,48 @@
+# -*- coding: utf-8 -*- 
+"""
+SIF2007 Examination 1
+Pan Eu Jin 23052342
+1.(b)(ii) Newton-Raphson Method, x0=1.1
+"""
+
+#Note:If the table does not display correctly, please resize the console so that it fits the table
+import numpy as np
+import matplotlib.pyplot as mpl
+
+#Newton-Raphson method for f(x)=sin(x) - x/2 using x0=1.1
+def f(x):
+    return np.sin(x)-x/2                        #Change with Q
+def df(x):
+    return np.cos(x)-0.5                         #Change with Q
+def NR(x):
+    return x-f(x)/df(x)
+def calc_err(x1,x0):
+    return abs(x1-x0)
+    
+#Starting variables
+x0 = 1.1                                          #Change with Q
+x1 = NR(x0)
+err = calc_err(x1, x0)
+i = 0
+
+# Prepare table header
+print('\033[4m|  i  |      x_i      |     x_i+1     |      err      |\033[0m')
+
+# Loop until error is below threshold
+while err > 1E-6:                             #Change with Q
+    x1 = NR(x0)
+    err = calc_err(x1, x0)
+    print('| ', i, ' | ', f"{x0:.5e}", ' | ', f"{x1:.5e}", ' | ', f"{err:.5e}", ' |')
+    mpl.plot(x0,f(x0),'bo',markersize=9)
+    x0 = x1
+    i += 1
+print('Approx. root =', f"{x0:.5e}")
+mpl.plot(x0, f(x0), 'm*', markersize=9)
+
+#Plotting of graph
+x=np.linspace(0, 2, 1000)                #Might need tweaking
+mpl.ylim(-1.5, 3000000)
+mpl.plot(x, f(x), 'k--')
+mpl.xlabel('x')
+mpl.ylabel('f(x)')
+mpl.show()
